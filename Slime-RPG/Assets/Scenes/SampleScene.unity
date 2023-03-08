@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 1.046, y: 1.51, z: 3.74}
+  m_FollowOffset: {x: 0.80599976, y: 1.51, z: 5.64}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -407,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleShell Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5286340038456360043, guid: 1b5246846169b6d4dbb5f16dd759af91, type: 3}
+      propertyPath: _speed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5246846169b6d4dbb5f16dd759af91, type: 3}
 --- !u!1 &963194225
@@ -486,8 +490,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.02506018, y: 0.9737366, z: -0.18264507, w: -0.13360347}
-  m_LocalPosition: {x: -4.12, y: 2.51, z: 3.74}
+  m_LocalRotation: {x: -0.0091605345, y: 0.9891249, z: -0.1288533, w: -0.0703196}
+  m_LocalPosition: {x: -3.9640002, y: 2.51, z: 5.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -609,7 +613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220143204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.166, y: 1, z: 0}
+  m_LocalPosition: {x: -4.77, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 108729493}
@@ -629,6 +633,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+  _projectile: {fileID: 6952917701282027924, guid: 3dd0452a330ecf446a0225e423f543b4, type: 3}
+  _timeBetweenAttacks: 2
+  _attackForce: 1.5
+  _damage: 1
+  _hp: 30
 --- !u!1 &1353514475
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,8 +818,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969585201}
-  m_LocalRotation: {x: -0.02506018, y: 0.9737366, z: -0.18264507, w: -0.13360347}
-  m_LocalPosition: {x: -4.12, y: 2.51, z: 3.74}
+  m_LocalRotation: {x: -0.0091605345, y: 0.9891249, z: -0.1288533, w: -0.0703196}
+  m_LocalPosition: {x: -3.9640002, y: 2.51, z: 5.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 407126402}
@@ -824,6 +833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1220143205}
     m_Modifications:
+    - target: {fileID: 108729495, guid: 001deacb5cde65e438e9871b432499b5, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2442375027368042810, guid: 001deacb5cde65e438e9871b432499b5, type: 3}
       propertyPath: m_Name
       value: Slime

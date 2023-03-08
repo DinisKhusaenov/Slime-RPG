@@ -120,4 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
-  _target: {fileID: 0}
+  _enemy: {fileID: 11400000, guid: d4f899f3dec178244b1cb294ded61229, type: 2}

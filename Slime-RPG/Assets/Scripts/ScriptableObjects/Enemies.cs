@@ -6,6 +6,9 @@ public class Enemies : ScriptableObject
     [SerializeField] private string _label;
     [SerializeField] private int _hp;
     [SerializeField] private int _damage;
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private int _attackSpeed;
 
+    public int HP => _hp;
+    public int Damage => _damage;
+    public int AttackSpeed => _attackSpeed;
 }

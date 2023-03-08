@@ -15,4 +15,4 @@ MonoBehaviour:
   _label: Enemy
   _hp: 30
   _damage: 4
-  _prefab: {fileID: 1798531640856169917, guid: 1b5246846169b6d4dbb5f16dd759af91, type: 3}
+  _attackSpeed: 2
