@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_enemiesCount <= _spawnPoints.Count)
         {
-            for (int i = 0; i < _enemiesCount; i++)
+            for (int i = 0; i < Random.Range(1, _enemiesCount); i++)
             {
                 Transform _spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count - 1)];
                 CreateEnemy(Random.Range(0, _enemies.Count - 1), _spawnPoint);
@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < _spawnPoints.Count; i++)
+            for (int i = 0; i < Random.Range(1, _spawnPoints.Count); i++)
             {
                 Transform _spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count - 1)];
                 CreateEnemy(Random.Range(0, _enemies.Count - 1), _spawnPoint);

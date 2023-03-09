@@ -23,6 +23,16 @@ public class Player : MonoBehaviour
 
     public int Damage => _damage;
 
+    public void EnhanceDamage(int _attack)
+    {
+        _damage += _attack;
+    }
+
+    public void EnhanceHP(int _hpUpgrade)
+    {
+        _maxHp += _hpUpgrade;
+    }
+
     private void Start()
     {
         if (instance == null)

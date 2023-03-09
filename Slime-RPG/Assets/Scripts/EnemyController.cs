@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -14,6 +15,8 @@ public class EnemyController : MonoBehaviour
     private int _hp;
     private int _damage;
     private bool _alreadyAttacked;
+
+    public event Action<float> EnemyHealthChanged;
 
     private void Awake()
     {
@@ -74,15 +77,29 @@ public class EnemyController : MonoBehaviour
     private void TakeDamage()
     {
         if (Player.instance != null)
-            _hp -= Player.instance.Damage;
+            ChangeHealth(Player.instance.Damage);
 
         _animator.SetBool("GetHit", true);
+    }
 
-        if (_hp < 0) DeadEnemy();
+    private void ChangeHealth(int _damage)
+    {
+        _hp -= _damage;
+
+        if (_hp < 0)
+        {
+            DeadEnemy();
+        }
+        else
+        {
+            float _currentHealthAsPercantage = (float)_hp / _enemy.HP;
+            EnemyHealthChanged?.Invoke(_currentHealthAsPercantage);
+        }
     }
 
     private void DeadEnemy()
     {
+        EnemyHealthChanged?.Invoke(0);
         int _currentMoney =  PlayerPrefs.GetInt("Money");
         PlayerPrefs.SetInt("Money", _currentMoney + 10);
         if (_hp <= 0) Destroy(gameObject);

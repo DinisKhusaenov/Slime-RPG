@@ -453,7 +453,7 @@ MonoBehaviour:
   - {fileID: 2787629207612363278}
   _enemies:
   - {fileID: 5286340038456360043, guid: 1b5246846169b6d4dbb5f16dd759af91, type: 3}
-  _enemiesCount: 2
+  _enemiesCount: 3
 --- !u!1 &6648038933380311515
 GameObject:
   m_ObjectHideFlags: 0
