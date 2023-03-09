@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,14 +10,16 @@ public class Player : MonoBehaviour
     [SerializeField] private int _damage = 8;
     [SerializeField] private int _hp = 30;
 
+    private Animator _animator;
 
     private bool _alreadyAttacked;
+    private int _maxHp;
 
     private GameObject[] _enemies;
     private float _stopDistance = 6;
 
-
     public static Player instance;
+    public event Action<float> HealthChanged;
 
     public int Damage => _damage;
 
@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
         {
             instance = this;
         }
+
+        _animator = GetComponentInChildren<Animator>();
+        _maxHp = _hp;
 
     }
 
@@ -47,16 +50,24 @@ public class Player : MonoBehaviour
             else
             {
                 AttackEnemy(_enemies[i]);
+                _animator.SetBool("Walk", false);
             }
         }
 
         if (_enemies.Length == 0)
+        {
             PlayerMovement();
+            _hp = _maxHp;
+            HealthChanged?.Invoke(_hp);
+        }
     }
 
     private void PlayerMovement()
     {
         transform.localPosition += -transform.right * _speed * Time.deltaTime;
+
+        _animator.SetBool("Walk", true);
+        _animator.SetBool("GetHit", false);
     }
 
     private void AttackEnemy(GameObject _enemy)
@@ -72,6 +83,8 @@ public class Player : MonoBehaviour
 
             _alreadyAttacked = true;
             Invoke(nameof(ResetAttack), _timeBetweenAttacks);
+
+            _animator.SetBool("GetHit", false);
         }
     }
     private void ResetAttack()
@@ -81,13 +94,29 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int _damage)
     {
+        _animator.SetBool("GetHit", true);
+
+        ChangeHealth(_damage);
+    }
+
+    private void ChangeHealth(int _damage)
+    {
         _hp -= _damage;
 
-        if (_hp < 0) DeadPlayer();
+        if (_hp < 0 & gameObject != null) 
+        {
+            DeadPlayer(); 
+        }
+        else
+        {
+            float _currentHealthAsPercantage = (float)_hp / _maxHp;
+            HealthChanged?.Invoke(_currentHealthAsPercantage);
+        }
     }
 
     private void DeadPlayer()
     {
+        HealthChanged?.Invoke(0);
         Destroy(gameObject);
     }
 }

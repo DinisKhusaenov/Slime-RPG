@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _label: Enemy
   _hp: 30
-  _damage: 4
+  _damage: 3
   _attackSpeed: 2

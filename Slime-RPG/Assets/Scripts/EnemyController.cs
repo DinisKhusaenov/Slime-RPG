@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -10,6 +9,8 @@ public class EnemyController : MonoBehaviour
     private float _attackDistance = 1;
     private float _distanceToPlayer;
 
+    private Animator _animator;
+
     private int _hp;
     private int _damage;
     private bool _alreadyAttacked;
@@ -20,10 +21,14 @@ public class EnemyController : MonoBehaviour
 
         _hp = _enemy.HP;
         _damage = _enemy.Damage;
+
+        _animator = GetComponent<Animator>();
     }
     private void FixedUpdate()
     {
-        _distanceToPlayer = (_target.position - transform.position).magnitude;
+        if (_target != null)
+            _distanceToPlayer = (_target.position - transform.position).magnitude;
+        else _distanceToPlayer = 0;
 
         if (_distanceToPlayer > _attackDistance)
         {
@@ -37,12 +42,14 @@ public class EnemyController : MonoBehaviour
 
     private void AttackPlayer()
     {
-        if (!_alreadyAttacked)
+        if (!_alreadyAttacked & Player.instance != null)
         {
             Player.instance.TakeDamage(_damage);
 
             _alreadyAttacked = true;
             Invoke(nameof(ResetAttack), 5 / _enemy.AttackSpeed);
+
+            _animator.SetBool("GetHit", false);
         }
     }
     private void ResetAttack()
@@ -66,13 +73,18 @@ public class EnemyController : MonoBehaviour
 
     private void TakeDamage()
     {
-        _hp -= Player.instance.Damage;
+        if (Player.instance != null)
+            _hp -= Player.instance.Damage;
+
+        _animator.SetBool("GetHit", true);
 
         if (_hp < 0) DeadEnemy();
     }
 
     private void DeadEnemy()
     {
+        int _currentMoney =  PlayerPrefs.GetInt("Money");
+        PlayerPrefs.SetInt("Money", _currentMoney + 10);
         if (_hp <= 0) Destroy(gameObject);
     }
 }
